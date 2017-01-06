@@ -1,0 +1,10 @@
+#!/bin/bash
+# Update dotfiles within your home folder
+
+
+if [ $1 = "dot.emacs" ]; then
+    mv $HOME/.emacs $HOME/.emacs.dotbak
+    cat ./dot.emacs | tee $HOME/.emacs &> /dev/null
+else
+    echo "wrong parameter passed!"
+fi
