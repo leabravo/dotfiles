@@ -20,6 +20,21 @@
 (require 'diminish)
 (require 'bind-key)
 
+(use-package clojure-mode
+  :ensure t
+  :config
+  (require 'clojure-mode))
+
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (require 'rainbow-delimiters))
+
+(use-package cider
+  :ensure t
+  :config
+  (require 'cider))
+
 (use-package evil
   :ensure t
   :config
