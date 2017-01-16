@@ -3,7 +3,7 @@
 
 
 if [ $1 = "dot.emacs" ]; then
-    mv $HOME/.emacs $HOME/.emacs.dotbak
+    cat $HOME/.emacs | tee $HOME/.emacs.dotbak &> /dev/null 
     cat ./dot.emacs | tee $HOME/.emacs &> /dev/null
 else
     echo "wrong parameter passed!"
