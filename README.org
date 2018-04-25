@@ -1,4 +1,4 @@
 * My Dotfiles
 ** Prerequisites
 - [[https://github.com/powerline/fonts][Powerline Fonts]]
-- [[https://github.com/robbyrussell/oh-my-zsh][Oh My Zsh!]]
+- [[https://github.com/robbyrussell/oh-my-zsh][:scream: Oh My Zsh!]]
