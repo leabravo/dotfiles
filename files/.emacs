@@ -12,7 +12,17 @@
   (package-initialize))
 
 ;;;; Org-mode configurations
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sh . t)
+   (python . t)
+   (R . t)))
+
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
     ("~/Dropbox/Private/ORG/mylife.org" "~/Dropbox/Private/ORG/archive.org")))
@@ -21,7 +31,11 @@
    (quote
     (("~/Dropbox/Private/ORG/mylife.org" :tag . "RUTINAS/GTD"))))
  '(org-refile-use-outline-path "~/Dropbox/Private/ORG/mylife.org")
- '(org-startup-truncated nil))
+ '(org-startup-truncated nil)
+ '(package-selected-packages
+   (quote
+    (web-mode use-package rainbow-delimiters projectile powerline org-bullets magit flycheck evil dracula-theme company-jedi company-anaconda cider better-defaults atom-one-dark-theme)))
+ '(python-shell-interpreter "ipython"))
 ;;;; end
 
 ;;;; Use-package setup
@@ -76,8 +90,7 @@
 
 (setq inhibit-startup-message t)
 
-(custom-set-variables
- '(python-shell-interpreter "ipython"))
+
 
 (setq
  backup-by-copying t ; no clobber symlinks
@@ -157,3 +170,9 @@
 
 (provide '.emacs)
 ;;; .emacs ends here
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

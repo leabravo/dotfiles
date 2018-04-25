@@ -1,4 +1,20 @@
 * My Dotfiles
+** Language support for org-babel
+The following configuration within .emacs ensures that the next Babel code blocks can be run.
+#+begin_src emacs-lisp
+; Languages requiring org-babel support
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sh . t)
+   (python . t)))
+#+end_src
+
+#+RESULTS:
+
 ** Prerequisites
-- [[https://github.com/powerline/fonts][Powerline Fonts]]
-- [[https://github.com/robbyrussell/oh-my-zsh][:scream: Oh My Zsh!]]
+- :scream: [[https://github.com/robbyrussell/oh-my-zsh][Oh My Zsh!]]
+#+BEGIN_SRC sh :results silent
+echo "hi"
+#+END_SRC
+
+- :ab: [[https://github.com/powerline/fonts][Powerline Fonts]]
