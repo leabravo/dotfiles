@@ -1,10 +1,10 @@
 #!/bin/bash
 # Update dotfiles within your home folder
-
-
-if [ $1 = "dot.emacs" ]; then
-    cat $HOME/.emacs | tee $HOME/.emacs.dotbak &> /dev/null 
-    cat ./dot.emacs | tee $HOME/.emacs &> /dev/null
-else
-    echo "wrong parameter passed!"
-fi
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+FILES=$DIR/files/.*
+for f in $FILES
+do
+    if [ ! -d $f ]; then
+        ln -sf $f ~/"${f##*/}"
+    fi
+done
