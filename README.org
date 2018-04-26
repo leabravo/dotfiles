@@ -1,6 +1,6 @@
 * My Dotfiles
 ** Language support for org-babel
-The following configuration within .emacs ensures that the next Babel code blocks can be run. The function produces no side effects if ran outside the configuration file.
+   The following configuration within .emacs ensures that the next Babel code blocks can be run. The function produces no side effects if ran outside the configuration file.
 #+begin_src emacs-lisp :results silent
 ; Languages requiring org-babel support
 (org-babel-do-load-languages
@@ -26,3 +26,6 @@ cd fonts
 *** emacs
 *** rxvt-unicode
 *** tmux
+** Prerequisites
+- [[https://github.com/powerline/fonts][Powerline Fonts]]
+- [[https://github.com/robbyrussell/oh-my-zsh][Oh My Zsh!]]
