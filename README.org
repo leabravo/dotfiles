@@ -26,6 +26,3 @@ cd fonts
 *** emacs
 *** rxvt-unicode
 *** tmux
-** Prerequisites
-- [[https://github.com/powerline/fonts][Powerline Fonts]]
-- [[https://github.com/robbyrussell/oh-my-zsh][Oh My Zsh!]]
