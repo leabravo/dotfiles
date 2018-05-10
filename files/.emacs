@@ -19,23 +19,29 @@
    (R . t)))
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
-    ("~/Dropbox/Private/ORG/mylife.org" "~/Dropbox/Private/ORG/archive.org")))
- '(org-archive-location "%s_archive::datetree/* Finished Tasks")
- '(org-refile-targets
-   (quote
-    (("~/Dropbox/Private/ORG/mylife.org" :tag . "RUTINAS/GTD"))))
- '(org-refile-use-outline-path "~/Dropbox/Private/ORG/mylife.org")
+    ("~/Dropbox/Private/ORG/journal.org" "~/Dropbox/Private/ORG/inbox.org")))
+ '(org-refile-targets '((nil :maxlevel . 1)
+                        (org-agenda-files :maxlevel . 1)))
+ '(org-refile-use-outline-path t)
+ '(org-outline-path-complete-in-steps nil)
  '(org-startup-truncated nil)
- '(package-selected-packages
-   (quote
-    (web-mode use-package rainbow-delimiters projectile powerline org-bullets magit flycheck evil dracula-theme company-jedi company-anaconda cider better-defaults atom-one-dark-theme)))
- '(python-shell-interpreter "ipython"))
+ '(org-archive-save-context-info nil)
+ '(org-capture-templates
+   '(("t" "Todo" entry
+      (file+headline "~/Dropbox/Private/ORG/inbox.org" "INBOX")
+      (file "~/Dropbox/Private/ORG/tpl-todo.txt"))
+     ("b" "Bookmark" entry
+      (file "~/Dropbox/Private/ORG/references.org")
+      (file "~/Dropbox/Private/ORG/tpl-bookmark.txt"))
+     ("r" "Review")
+     ("rd" "Daily Review" entry
+      (file "~/Dropbox/Private/ORG/dailyreview.org")
+      (file "~/Dropbox/Private/ORG/tpl-dreview.txt"))))
+ 
+ '(python-shell-interpreter "python3"))
+ ;'(python-shell-interpreter-args "--simple-prompt -i"))
 ;;;; end
 
 ;;;; Use-package setup
@@ -83,14 +89,12 @@
   :config
   (add-hook 'after-init-hook 'global-company-mode))
 
-(use-package dracula-theme
+(use-package atom-one-dark-theme
   :ensure t
-  :init
-  (load-theme 'dracula))
+  :config
+  (load-theme 'atom-one-dark t))
 
 (setq inhibit-startup-message t)
-
-
 
 (setq
  backup-by-copying t ; no clobber symlinks
@@ -170,9 +174,5 @@
 
 (provide '.emacs)
 ;;; .emacs ends here
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+(put 'dired-find-alternate-file 'disabled nil)
