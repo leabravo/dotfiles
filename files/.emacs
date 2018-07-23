@@ -7,30 +7,34 @@
   (require 'package)
   (add-to-list
    'package-archives
-   '("melpa" . "https://melpa.org/packages/")
+   '("melpa" . "http://melpa.org/packages/")
    t)
   (package-initialize))
 
 ;;;; Org-mode configurations
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((sh . t)
-   (python . t)
-   (R . t)))
+;(org-babel-do-load-languages
+; 'org-babel-load-languages
+; '((sh . t)
+;   (python . t)
+;   (R . t)))
 
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
-    ("~/Dropbox/Private/ORG/journal.org" "~/Dropbox/Private/ORG/inbox.org")))
- '(org-refile-targets '((nil :maxlevel . 1)
-                        (org-agenda-files :maxlevel . 1)))
- '(org-refile-use-outline-path t)
- '(org-outline-path-complete-in-steps nil)
- '(org-startup-truncated nil)
+    ("~/Dropbox/Private/ORG/rutinas.org" "~/Dropbox/Private/ORG/gtd.org")))
  '(org-archive-save-context-info nil)
  '(org-capture-templates
-   '(("t" "Todo" entry
-      (file+headline "~/Dropbox/Private/ORG/inbox.org" "INBOX")
+   (quote
+    (("t" "Todo")
+     ("tm" "Mail" entry
+      (file "~/Dropbox/Private/ORG/inbox.org")
+      "* TODO [[%l][%:subject]]")
+     ("tt" "Task" entry
+      (file "~/Dropbox/Private/ORG/inbox.org")
       (file "~/Dropbox/Private/ORG/tpl-todo.txt"))
      ("b" "Bookmark" entry
       (file "~/Dropbox/Private/ORG/references.org")
@@ -38,8 +42,14 @@
      ("r" "Review")
      ("rd" "Daily Review" entry
       (file "~/Dropbox/Private/ORG/dailyreview.org")
-      (file "~/Dropbox/Private/ORG/tpl-dreview.txt"))))
- 
+      (file "~/Dropbox/Private/ORG/tpl-dreview.txt")))))
+ '(org-outline-path-complete-in-steps nil)
+ '(org-refile-targets
+   (quote
+    ((nil :maxlevel . 2)
+     (org-agenda-files :maxlevel . 2))))
+ '(org-refile-use-outline-path t)
+ '(org-startup-truncated nil)
  '(python-shell-interpreter "python3"))
  ;'(python-shell-interpreter-args "--simple-prompt -i"))
 ;;;; end
@@ -56,6 +66,12 @@
 
 ;;;; Basic Configuration
 ;;;; ~~~~~~~~~~~~~~~~~~~
+(add-to-list 'default-frame-alist '(font . "Inconsolatazi4-13" ))
+(set-face-attribute 'default t :font "Inconsolatazi4-13")
+
+(setq org-icalendar-combined-agenda-file "~/Dropbox/Private/ORG/calendar.ics")
+(add-hook 'org-capture-after-finalize-hook (lambda () (org-icalendar-combine-agenda-files)))
+
 (use-package better-defaults
   :ensure t
   :config
@@ -82,7 +98,7 @@
   (require 'projectile)
   ;; Behave """like""" magit-status
   (define-key projectile-mode-map (kbd "C-x p") 'projectile-commander)
-  (projectile-global-mode))
+  (projectile-mode))
 
 (use-package company
   :ensure t
@@ -105,6 +121,15 @@
  kept-old-versions 2
  version-control t)
 ;;;; end
+
+;;;; R specific configurations
+;;;; ~~~~~~~~~~~~~~~~~~~~~~~~~
+(use-package ess
+  :ensure t
+  :config
+  (require 'ess))
+;;;; end
+
 
 ;;;; Clojure specific configurations
 ;;;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -145,6 +170,9 @@
   (add-hook 'after-init-hook #'global-flycheck-mode))
 ;;;; end
 
+(use-package ox-hugo
+  :after ox)
+
 ;;;; Web related configurations
 ;;;; ~~~~~~~~~~~~~~~~~~~~~~~~~~
 (use-package web-mode
@@ -172,7 +200,26 @@
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 ;;;; end
 
+
+;;;; Gnus Configuration
+(setq gnus-select-method
+      '(nnimap "fastmail"
+	       (nnimap-address "imap.fastmail.com")  ; it could also be imap.googlemail.com if that's your server.
+	       (nnimap-server-port "imaps")
+	       (nnimap-stream ssl)))
+
+(setq auth-sources
+      '((:source "~/.authinfo.gpg")))
+
+(setq epa-pinentry-mode 'loopback)
+;;;; end
+
 (provide '.emacs)
 ;;; .emacs ends here
-
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 (put 'dired-find-alternate-file 'disabled nil)
