@@ -69,6 +69,9 @@
 (add-to-list 'default-frame-alist '(font . "Inconsolatazi4-13" ))
 (set-face-attribute 'default t :font "Inconsolatazi4-13")
 
+(add-hook 'focus-in-hook (lambda () (progn (setq org-tags-column (- 5 (window-body-width)))) (org-align-all-tags)))
+(add-hook 'focus-out-hook (lambda () (progn (setq org-tags-column (- 5 (window-body-width)))) (org-align-all-tags)))
+
 (setq org-icalendar-combined-agenda-file "~/Dropbox/Private/ORG/calendar.ics")
 (add-hook 'org-capture-after-finalize-hook (lambda () (org-icalendar-combine-agenda-files)))
 
