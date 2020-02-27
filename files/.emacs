@@ -1,228 +1,122 @@
-;;; config --- Summary:
-;;; Commentary:
+(require 'package)
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+		    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+    (when no-ssl (warn "\
+Your version of Emacs does not support SSL connections,
+which is unsafe because it allows man-in-the-middle attacks.
+There are two things you can do about this warning:
+1. Install an Emacs version that does support SSL and be safe.
+2. Remove this warning from your init file so you won't see it again."))
+    (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+    ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+    ;; and `package-pinned-packages`. Most users will not need or want to do this.
+    ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+    )
+(package-initialize)
 
-;;; Code:
+(add-to-list 'package-archives
+	     '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (add-to-list
-   'package-archives
-   '("melpa" . "http://melpa.org/packages/")
-   t)
-  (package-initialize))
+(custom-set-faces
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "nil" :family "Fira Code")))))
 
-;;;; Org-mode configurations
-;(org-babel-do-load-languages
-; 'org-babel-load-languages
-; '((sh . t)
-;   (python . t)
-;   (R . t)))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files
-   (quote
-    ("~/Dropbox/Private/ORG/rutinas.org" "~/Dropbox/Private/ORG/gtd.org")))
- '(org-archive-save-context-info nil)
- '(org-capture-templates
-   (quote
-    (("t" "Todo")
-     ("tm" "Mail" entry
-      (file "~/Dropbox/Private/ORG/inbox.org")
-      "* TODO [[%l][%:subject]]")
-     ("tt" "Task" entry
-      (file "~/Dropbox/Private/ORG/inbox.org")
-      (file "~/Dropbox/Private/ORG/tpl-todo.txt"))
-     ("b" "Bookmark" entry
-      (file "~/Dropbox/Private/ORG/references.org")
-      (file "~/Dropbox/Private/ORG/tpl-bookmark.txt"))
-     ("r" "Review")
-     ("rd" "Daily Review" entry
-      (file "~/Dropbox/Private/ORG/dailyreview.org")
-      (file "~/Dropbox/Private/ORG/tpl-dreview.txt")))))
- '(org-outline-path-complete-in-steps nil)
- '(org-refile-targets
-   (quote
-    ((nil :maxlevel . 2)
-     (org-agenda-files :maxlevel . 2))))
- '(org-refile-use-outline-path t)
- '(org-startup-truncated nil)
- '(python-shell-interpreter "python3"))
- ;'(python-shell-interpreter-args "--simple-prompt -i"))
-;;;; end
-
-;;;; Use-package setup
-;;;; ~~~~~~~~~~~~~~~~~
+;; bootstrap use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+(require 'use-package)
 
-(eval-when-compile
-  (require 'use-package))
-;;;; end
-
-;;;; Basic Configuration
-;;;; ~~~~~~~~~~~~~~~~~~~
-(add-to-list 'default-frame-alist '(font . "Inconsolatazi4-13" ))
-(set-face-attribute 'default t :font "Inconsolatazi4-13")
-
-(add-hook 'focus-in-hook (lambda () (progn (setq org-tags-column (- 5 (window-body-width)))) (org-align-all-tags)))
-(add-hook 'focus-out-hook (lambda () (progn (setq org-tags-column (- 5 (window-body-width)))) (org-align-all-tags)))
-
-(setq org-icalendar-combined-agenda-file "~/Dropbox/Private/ORG/calendar.ics")
-(add-hook 'org-capture-after-finalize-hook (lambda () (org-icalendar-combine-agenda-files)))
+(unless (package-installed-p 'org)
+  (package-refresh-contents)
+  (package-install 'org))
+(require 'org)
 
 (use-package better-defaults
-  :ensure t
-  :config
-  (require 'better-defaults))
-
-(use-package evil
-  :ensure t
   :init
-  ;; CRITICAL! Avoid undoing large chunks.
-  (setq evil-want-fine-undo 'fine)
-  :config
-  (evil-mode t))
+  :ensure t)
 
-(use-package magit
+(use-package doom-modeline
   :ensure t
-  :init
-  (global-set-key (kbd "C-x g") 'magit-status)
-  :config
-  (require 'magit))
-
-(use-package projectile
-  :ensure t
-  :config
-  (require 'projectile)
-  ;; Behave """like""" magit-status
-  (define-key projectile-mode-map (kbd "C-x p") 'projectile-commander)
-  (projectile-mode))
-
-(use-package company
-  :ensure t
-  :config
-  (add-hook 'after-init-hook 'global-company-mode))
+  :requires all-the-icons
+  :init (doom-modeline-mode 1))
+;; M-x all-the-icons-install-fonts
 
 (use-package atom-one-dark-theme
   :ensure t
-  :config
-  (load-theme 'atom-one-dark t))
+  :init (load-theme 'atom-one-dark))
 
-(setq inhibit-startup-message t)
+;; Org-Id
+(require 'org-id)
+(require 'org-archive)
+(setq org-id-link-to-org-use-id t)
 
-(setq
- backup-by-copying t ; no clobber symlinks
- backup-directory-alist
- '(("." . "~/.emacstory"))
- delete-old-versions t
- kept-new-versions 6
- kept-old-versions 2
- version-control t)
-;;;; end
+;; Update ID file on startup
+(org-id-update-id-locations)
 
-;;;; R specific configurations
-;;;; ~~~~~~~~~~~~~~~~~~~~~~~~~
-(use-package ess
-  :ensure t
-  :config
-  (require 'ess))
-;;;; end
-
-
-;;;; Clojure specific configurations
-;;;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-(use-package clojure-mode
-  :ensure t
-  :config
-  (require 'clojure-mode))
-
-(use-package rainbow-delimiters
-  :ensure t
-  :config
-  (require 'rainbow-delimiters))
-
-(use-package cider
-  :ensure t
-  :config
-  (require 'cider))
-;;;; end
-
-;;;; Python specific configurations
-;;;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-(use-package anaconda-mode
-  :ensure t
+(use-package htmlize
   :init
-  (setq python-shell-interpreter "python3")
-  (add-hook 'python-mode-hook 'anaconda-mode))
+  :ensure t)
 
-(use-package company-anaconda
-  :ensure t
-  :config
-  (require 'company-anaconda))
-
-(use-package flycheck
-  :ensure t
+(use-package deft
   :init
-  (setq-default flycheck-temp-prefix ".flycheck")
-  (global-flycheck-mode)
-  (add-hook 'after-init-hook #'global-flycheck-mode))
-;;;; end
+  :ensure t)
 
-(use-package ox-hugo
-  :after ox)
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
-;;;; Web related configurations
-;;;; ~~~~~~~~~~~~~~~~~~~~~~~~~~
-(use-package web-mode
+;; load evil
+(use-package evil
+  :ensure t ;; install the evil package if not installed
+  :init ;; tweak evil's configuration before loading it
+  (setq evil-search-module 'evil-search)
+  (setq evil-ex-complete-emacs-commands nil)
+  (setq evil-vsplit-window-right t)
+  (setq evil-split-window-below t)
+  (setq evil-shift-round nil)
+  (setq evil-want-C-u-scroll t)
+  :config ;; tweak evil after loading it
+  (evil-mode)
+  ;; example how to map a command in normal mode (called 'normal state' in evil)
+    (define-key evil-normal-state-map (kbd ", w") 'evil-window-vsplit))
+
+(use-package magit
   :ensure t
-  :init
-  (defun my-web-mode-hook ()
-    (setq web-mode-markup-indent-offset 2)
-    (setq web-mode-css-indent-offset 2)
-    (setq web-mode-code-indent-offset 2))
-  :config
-  (add-hook 'web-mode-hook (lambda ()
-                           (tern-mode t)
-                           (my-web-mode-hook))))
+  :bind (("C-x g" . magit-status)))
 
-(setq web-mode-content-types-alist
-      '(("jsx" . "\\.js[x]?\\'")))
+;; PUBLISHING
+(require 'ox-publish)
+(setq org-publish-project-alist
+      '(
+	("blog-notes"
+	 :base-directory "~/blog/src"
+	 :base-extension "org"
+	 :publishing-directory "~/blog/public_html/"
+	 :recursive t
+	 :publishing-function org-html-publish-to-html
+	 :auto-preamble nil
+	 :with-toc t
+         :htmlized-source t
+         :html-doctype "html5"
+	 :html-html5-fancy t
+         :htmlized-source t
+         :html-container nil
+         :with-todo-keywords t
+	 :html-todo-kwd-class-prefix t
+	 :auto-sitemap t
+	 :sitemap-title "Index"
+	 :sitemap-filename "index"
+         :html-head-include-default-style nil
+         :html-head-extra "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/style.css\" />"
+	 )
+	
+	("blog-static"
+	 :base-directory "~/blog/src"
+	 :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+	 :publishing-directory "~/blog/public_html"
+	 :recursive t
+	 :publishing-function org-publish-attachment
+	 )
+        
+        ("blog" :components ("blog-notes" "blog-static"))
 
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-;;;; end
-
-
-;;;; Gnus Configuration
-(setq gnus-select-method
-      '(nnimap "fastmail"
-	       (nnimap-address "imap.fastmail.com")  ; it could also be imap.googlemail.com if that's your server.
-	       (nnimap-server-port "imaps")
-	       (nnimap-stream ssl)))
-
-(setq auth-sources
-      '((:source "~/.authinfo.gpg")))
-
-(setq epa-pinentry-mode 'loopback)
-;;;; end
-
-(provide '.emacs)
-;;; .emacs ends here
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(put 'dired-find-alternate-file 'disabled nil)
+        ))
