@@ -1,4 +1,6 @@
 (require 'package)
+(package-initialize)
+
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
 		    (not (gnutls-available-p))))
        (proto (if no-ssl "http" "https")))
@@ -9,14 +11,16 @@ There are two things you can do about this warning:
 1. Install an Emacs version that does support SSL and be safe.
 2. Remove this warning from your init file so you won't see it again."))
     (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+    (add-to-list 'package-archives
+	         '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+    (add-to-list 'package-archives
+                 '("org" . "https://orgmode.org/elpa/") t)
+    (add-to-list 'package-archives
+                 '("org-plus-contrib" . "https://orgmode.org/elpa/") t)
     ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
     ;; and `package-pinned-packages`. Most users will not need or want to do this.
-    ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+    (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
     )
-(package-initialize)
-
-(add-to-list 'package-archives
-	     '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 (custom-set-faces
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "nil" :family "Fira Code")))))
@@ -27,9 +31,9 @@ There are two things you can do about this warning:
   (package-install 'use-package))
 (require 'use-package)
 
-(unless (package-installed-p 'org)
+(unless (package-installed-p 'org-plus-contrib)
   (package-refresh-contents)
-  (package-install 'org))
+  (package-install 'org-plus-contrib))
 (require 'org)
 
 (use-package better-defaults
@@ -85,6 +89,7 @@ There are two things you can do about this warning:
 
 ;; PUBLISHING
 (require 'ox-publish)
+(require 'ox-rss)
 (setq org-publish-project-alist
       '(
 	("blog-notes"
@@ -102,12 +107,14 @@ There are two things you can do about this warning:
          :html-container nil
          :with-todo-keywords t
 	 :html-todo-kwd-class-prefix t
-	 :auto-sitemap t
+	 ;;:auto-sitemap t
 	 :sitemap-title "Index"
-	 :sitemap-filename "index"
+	 :sitemap-filename "index.org"
+         :sitemap-style list
+         :sitemap-function org-list-to-subtree
          :html-head-include-default-style nil
          :html-head-extra "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/style.css\" />"
-	 )
+         )
 	
 	("blog-static"
 	 :base-directory "~/blog/src"
@@ -117,6 +124,30 @@ There are two things you can do about this warning:
 	 :publishing-function org-publish-attachment
 	 )
         
-        ("blog" :components ("blog-notes" "blog-static"))
+        ("blog-rss"
+	 :base-directory "~/blog/src"
+	 :base-extension "org"
+         :recursive nil
+	 :publishing-directory "~/blog/public_html/"
+	 :publishing-function (org-rss-publish-to-rss)
+	 :html-link-home "http://www.leetdatageek.com/"
+	 :html-link-use-abs-url t
+         :rss-extension "xml"
+         :section-numbers nil
+         :exclude ".*"
+         :include ("index.org")
+         :table-of-contents nil
+         )
 
+        ("blog" :components ("blog-notes" "blog-static" "blog-rss"))
         ))
+
+(defun org-capture-at-point ()
+  "Insert an org capture template at point."
+  (interactive)
+  (org-capture 0))
+
+(global-set-key (kbd "C-c c") #'org-capture-at-point)
+
+(setq org-capture-templates
+      '(("l" "Link nofollow" plain (file "") "{{{a(%?,%x)}}}")))
