@@ -107,11 +107,9 @@ There are two things you can do about this warning:
          :html-container nil
          :with-todo-keywords t
 	 :html-todo-kwd-class-prefix t
-	 ;;:auto-sitemap t
+	 :auto-sitemap t
 	 :sitemap-title "Index"
 	 :sitemap-filename "index.org"
-         :sitemap-style list
-         :sitemap-function org-list-to-subtree
          :html-head-include-default-style nil
          :html-head-extra "<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/style.css\" />"
          )
