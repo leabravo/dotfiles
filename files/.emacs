@@ -23,6 +23,10 @@ There are two things you can do about this warning:
     )
 
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "nil" :family "Fira Code")))))
 
 ;; bootstrap use-package
@@ -66,7 +70,7 @@ There are two things you can do about this warning:
   :init
   :ensure t)
 
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+;;(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 ;; load evil
 (use-package evil
@@ -86,6 +90,34 @@ There are two things you can do about this warning:
 (use-package magit
   :ensure t
   :bind (("C-x g" . magit-status)))
+
+(use-package emojify
+  :ensure t
+  :init (global-emojify-mode))
+
+;; Python Configurations
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+(use-package company
+  :ensure t
+  :config
+  (progn
+    (add-hook 'after-init-hook 'global-company-mode)))
+
+(use-package py-autopep8
+  :ensure t
+  :init)
+
+(use-package blacken
+  :ensure t
+  :init)
+
+(use-package elpy
+  :ensure t
+  :requires (flycheck py-autopep8 blacken company)
+  :init)
 
 ;; PUBLISHING
 (require 'ox-publish)
@@ -149,3 +181,11 @@ There are two things you can do about this warning:
 
 (setq org-capture-templates
       '(("l" "Link nofollow" plain (file "") "{{{a(%?,%x)}}}")))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (emojify elpy magit evil deft htmlize atom-one-dark-theme doom-modeline better-defaults org-plus-contrib use-package))))
