@@ -1,10 +1,18 @@
 #!/bin/bash
 # Update dotfiles within your home folder
+shopt -s extglob
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-FILES=$DIR/files/.*
-for f in $FILES
+FILES=$DIR/home/.!(|.)
+for f in $FILES;
 do
-    if [ ! -d $f ]; then
+    if [ ! -d $f ];
+    then
         ln -sf $f ~/"${f##*/}"
+    else
+        for d in $f/!(|.);
+        do
+            ln -sf $d ~/"$(basename $f)/${d##*/}"
+        done
     fi
 done
