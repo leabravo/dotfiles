@@ -12,6 +12,7 @@ do
     else
         for d in $f/!(|.);
         do
+	    mkdir -p ~/"$(basename $f)/${d##*/}"
             ln -sf $d ~/"$(basename $f)/${d##*/}"
         done
     fi
