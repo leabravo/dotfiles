@@ -1,0 +1,34 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/lemmyng/" . "dotfiles/")
+ ("/home/lemmyng/dotfiles/.config/" . "emacs/")
+ ("/home/lemmyng/dotfiles/" . ".config/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/lemmyng/dotfiles/"
+ "/home/lemmyng/dotfiles/.config/emacs/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "README.org"
+ "init.el"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/lemmyng/dotfiles/" (26107 11988 407669 117000) "./" "../" "README.org" ".config/" ".#README.org")
+
+ ("/home/lemmyng/" (26106 28097 518065 200000) ".dbus/" "./" ".sdkman/" "../" ".ipython/" ".vscode-server/" ".kotlinc_history" ".ivy2/" ".lesshst" ".node_repl_history" ".pyenv/" "gcloud_creds.json" ".yarn/" ".local/" ".g8/" ".bashrc" ".bashrc.omb-backup-20230125181143" ".sdirs" ".viminfo" "nltk_data/" ".dotnet/" ".bashrc~" ".zshrc" ".sqlite_history" ".bash_logout" ".ssh/" ".jupyter/" ".profile" "cloud_sql_proxy" ".bun/" ".docker/" ".aws/" ".giget/" ".deno/" ".config/" ".motd_shown" ".cargo/" ".keras/" "Notes/" ".wget-hsts" ".java/" ".sbt/" "cs" "dotfiles/" ".tmux/" ".bash_history" "zettelkasten/" ".cache/" ".degit/" ".oh-my-bash/" ".vscode-remote-containers/" ".osh-update" "packer.lua" ".sudo_as_admin_successful" ".gradle/" ".landscape/" ".nvm/" ".bloop/" ".vim/" "nvim-linux64.deb" "Code/" ".npm/" ".azure/" ".rustup/" ".python_history")
+
+ ("/home/lemmyng/dotfiles/.config/emacs/" (26106 28602 498036 931000) "./" "../" "history" "auto-save-list/" "custom.el" "places" "elpa/" "backups/" "init.el")
+
+ ("/home/lemmyng/dotfiles/.config/" (26106 24944 428241 487000) "./" "../" "emacs/")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
