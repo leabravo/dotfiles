@@ -115,3 +115,9 @@ source $HOME/.sdkman/bin/sdkman-init.sh
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 export PATH=$PATH:/usr/local/bin
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
+
+# Created by `pipx` on 2024-04-26 02:44:43
+export PATH="$PATH:$HOME/.local/bin"
