@@ -24,3 +24,15 @@
 ### Undotree for undoing
 
 [https://github.com/mbbill/undotree](Undotree repo)
+
+## Programming
+
+### Python
+
+- Install pyenv
+- Pyenv set python version
+- python -m pip install pipx --force
+- python -m pipx install poetry
+- initialize project with poetry
+- configura pyproject.toml to create .venv within project
+- poetry config virtualenvs.in-project true --local
