@@ -35,3 +35,4 @@
 - python -m pipx install poetry
 - initialize project with poetry
 - configura pyproject.toml to create .venv within project
+- poetry config virtualenvs.in-project true --local
