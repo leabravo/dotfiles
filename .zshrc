@@ -118,7 +118,11 @@ export PATH=$PATH:/usr/local/bin
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-export PATH="~/.pixi/bin:$PATH"
+export PATH="$HOME/.pixi/bin:$PATH"
 
 # Created by `pipx` on 2024-12-31 03:56:07
-export PATH="$PATH:~/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
+
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
