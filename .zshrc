@@ -126,3 +126,6 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv virtualenv-init -)"
+
+# zk
+export ZK_NOTEBOOK_DIR="$HOME/zettelkasten"
