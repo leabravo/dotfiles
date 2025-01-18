@@ -8,11 +8,12 @@ return require('packer').startup(function(use)
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.6',
 	  -- or                            , branch = '0.1.x',
+      as = "nvim-telescope",
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  use { 
-	  "catppuccin/nvim", 
+  use {
+	  "catppuccin/nvim",
 	  as = "catppuccin",
 	  config = function()
 		  vim.cmd("colorscheme catppuccin")
@@ -27,6 +28,16 @@ return require('packer').startup(function(use)
 
   use "mbbill/undotree"
   use "tpope/vim-fugitive"
+
+  use {
+      "MeanderingProgrammer/render-markdown.nvim",
+      after = {"nvim-treesitter"},
+  }
+
+  use {
+    'zk-org/zk-nvim',
+    after = {"nvim-telescope"},
+  }
 
   use {
 	  'VonHeikemen/lsp-zero.nvim',
