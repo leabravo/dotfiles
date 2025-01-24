@@ -5,6 +5,16 @@
 - [https://neovim.io/doc/user/lua-guide.html#lua-guide-modules](Official Nvim Lua Guide)
 - Run the nvim command `:h rtp` to check the runtime path and where nvim fetches the configurations
 
+## Tools
+
+- Lazygit
+    To authenticate, .ssh/config should have the contents set up like this:
+    ```txt
+    Host github.com
+      HostName github.com
+      User git
+      IdentityFile ~/.ssh/github-key
+    ```
 ## Packages
 
 ### Packer for package management
