@@ -8,13 +8,18 @@
 ## Tools
 
 - Lazygit
-    To authenticate, .ssh/config should have the contents set up like this:
-    ```txt
-    Host github.com
-      HostName github.com
-      User git
-      IdentityFile ~/.ssh/github-key
-    ```
+
+    > To authenticate, .ssh/config should have the contents set up like this:
+    >
+    > ```txt
+    >Host github.com
+    >  HostName github.com
+    >  User git
+    >  IdentityFile ~/.ssh/github-key
+    >```
+
+- tmux
+
 ## Packages
 
 ### Packer for package management
@@ -46,3 +51,18 @@
 - initialize project with poetry
 - configura pyproject.toml to create .venv within project
 - poetry config virtualenvs.in-project true --local
+
+### nvim commands
+- Semantic structure 
+    - Character
+    - Word 
+    - Sentence
+    - Paragraph
+    - Code
+        - Control structures 
+        - Function
+            Depends on: tree sitter
+            Binding: f
+                Config: set vim.keymap yaddi yadda
+        - Class
+    - Buffer
