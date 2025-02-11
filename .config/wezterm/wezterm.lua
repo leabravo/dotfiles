@@ -9,7 +9,7 @@ local bg = wezterm.color.from_hsla(bg_h, bg_s, bg_l, 0)
 
 local config = {}
 if wezterm.config_builder then
-    config = wezterm.config_builder()
+	config = wezterm.config_builder()
 end
 
 -- https://github.com/catppuccin/wezterm
@@ -25,41 +25,41 @@ config.hide_tab_bar_if_only_one_tab = false
 --config.window_background_opacity = 0.95
 
 config.window_frame = {
-    border_left_width = 0,
-    border_right_width = 0,
-    border_bottom_height = 0,
-    border_top_height = 0,
+	border_left_width = 0,
+	border_right_width = 0,
+	border_bottom_height = 0,
+	border_top_height = 0,
 }
 
 config.window_padding = {
-    left = 0,
-    right = 0,
-    top = 0,
-    bottom = 0,
+	left = 0,
+	right = 0,
+	top = 0,
+	bottom = 0,
 }
 
 config.colors = {
-    tab_bar = {
-        background = bg,
-    },
+	tab_bar = {
+		background = bg,
+	},
 }
 
 config.background = {
-    {
-        source = {
-            File = "C:\\Users\\leandro.bravo\\Pictures\\wezterm.jpg",
-        },
-        hsb = dimmer,
-        opacity = 1,
-    },
-    {
-        source = {
-            Color = scheme_def.background,
-        },
-        width = "100%",
-        height = "100%",
-        opacity = 0.95,
-    },
+	{
+		source = {
+			File = "C:\\Users\\leandro.bravo\\Pictures\\wezterm.jpg",
+		},
+		hsb = dimmer,
+		opacity = 0.75,
+	},
+	{
+		source = {
+			Color = scheme_def.background,
+		},
+		width = "100%",
+		height = "100%",
+		opacity = 0.95,
+	},
 }
 
 return config
