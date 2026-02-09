@@ -4,6 +4,8 @@ require('config.zk_nvim')
 require('config.catppuccin')
 require('config.nvim_tree')
 require('config.lualine')
+require('config.telescope')
+require('config.pins')
 
 -- disable netrw at the very start of your init.lua
 vim.g.loaded_netrw = 1

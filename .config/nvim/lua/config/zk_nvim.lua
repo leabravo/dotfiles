@@ -1,4 +1,4 @@
-zk_nvim = require('zk')
+local zk_nvim = require('zk')
 
 zk_nvim.setup({
 	picker = "telescope",

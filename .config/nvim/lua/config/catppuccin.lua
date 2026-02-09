@@ -1,4 +1,4 @@
-catppuccin = require('catppuccin')
+local catppuccin = require('catppuccin')
 
 catppuccin.setup({
     flavor = "mocha",
