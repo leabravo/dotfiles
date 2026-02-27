@@ -3,9 +3,19 @@ require('config.nvim_web_devicons')
 require('config.zk_nvim')
 require('config.catppuccin')
 require('config.nvim_tree')
+require('config.nvim_treesitter')
 require('config.lualine')
 require('config.telescope')
 require('config.pins')
+
+vim.o.winborder = 'rounded'
+
+-- Enable folding by TreeSitter tree
+vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.wo[0][0].foldmethod = 'expr'
+
+-- Force indentation by TreeSitter
+vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
 -- disable netrw at the very start of your init.lua
 vim.g.loaded_netrw = 1

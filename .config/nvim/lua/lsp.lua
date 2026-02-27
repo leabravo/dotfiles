@@ -19,3 +19,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('zk_lsp')
+vim.lsp.enable('clangd')
+vim.lsp.enable('basedpyright')
+vim.lsp.enable('gopls')

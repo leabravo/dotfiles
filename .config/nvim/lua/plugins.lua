@@ -24,6 +24,9 @@ vim.pack.add({
         src = 'https://github.com/nvim-tree/nvim-tree.lua'
     },
     {
+        src = 'https://github.com/nvim-treesitter/nvim-treesitter'
+    },
+    {
         src = 'https://github.com/nvim-lualine/lualine.nvim'
     },
 })
