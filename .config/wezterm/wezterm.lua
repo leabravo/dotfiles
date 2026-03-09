@@ -17,6 +17,7 @@ end
 
 -- https://github.com
 config.color_scheme = scheme
+config.font_size = 11.5
 
 -- change config now
 -- Check if running on Windows
