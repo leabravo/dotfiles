@@ -15,23 +15,34 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
+config.front_end = "WebGpu"
+config.enable_wayland = true
+
 -- https://github.com
 config.color_scheme = scheme
-config.font_size = 11.5
+config.font_size = 10.2
 
 -- change config now
 -- Check if running on Windows
 local is_windows = wezterm.target_triple:find("windows") ~= nil
 
 -- Shared configuration
-config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+config.adjust_window_size_when_changing_font_size = false
+config.line_height = .99
+config.cell_width = .89
+config.use_resize_increments = false
+config.window_decorations = "NONE"
 config.enable_scroll_bar = false
 config.hide_tab_bar_if_only_one_tab = false
 config.window_padding = {
-    left = 5,
-    right = 5,
-    top = 5,
+    left = ".2cell",
+    right = ".2cell",
+    top = 0,
     bottom = 0,
+}
+config.window_content_alignment = {
+  horizontal = 'Center',
+  vertical = 'Center',
 }
 
 if is_windows then
