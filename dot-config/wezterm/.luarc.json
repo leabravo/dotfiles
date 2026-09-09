@@ -1,0 +1,10 @@
+{
+  "workspace.library": [
+    "/path/to/wezterm-types",
+    "${3rd}/LuaJIT/library"
+  ],
+  "diagnostics.globals": [
+    "wezterm"
+  ],
+  "runtime.version": "LuaJIT"
+}

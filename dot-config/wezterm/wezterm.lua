@@ -51,7 +51,7 @@ if is_windows then
     config.integrated_title_button_style = "Windows"
     config.use_fancy_tab_bar = true
     config.window_background_opacity = 1
-    
+
     config.window_frame = {
         -- Using 'bg' variable from discussion 4858 for transparency
         active_titlebar_bg = bg,
@@ -98,7 +98,7 @@ end
 config.background = {
     {
         source = {
-            File = "C:\\Users\\bravotool\\Pictures\\wezterm.jpg",
+            File = "",
         },
         opacity = 0.75,
     },

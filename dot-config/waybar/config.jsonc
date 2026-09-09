@@ -70,6 +70,7 @@
         "tooltip-format": "{app}: {title}"
     },
     "mpd": {
+        "server": "/run/user/1000/mpd/socket", // Explicitly point to your socket path
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
         "format-disconnected": "Disconnected ",
         "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
