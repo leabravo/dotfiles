@@ -9,6 +9,7 @@ vim.keymap.set('n', '<leader>fr', builtin.live_grep, { desc = 'Telescope live ri
 vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = 'Telescope find git' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>fD', builtin.diagnostics, { desc = 'Telescope lsp diagnostics' })
 vim.keymap.set("n", "<leader>fp", function()
   local results = {}
 
@@ -39,3 +40,7 @@ vim.keymap.set("n", "<leader>fp", function()
     sorter = require("telescope.config").values.generic_sorter({}),
   }):find()
 end)
+
+vim.keymap.set('n', '<leader>fd', function()
+  builtin.diagnostics({ bufnr = 0 })
+end, { desc = 'Telescope buffer lsp diagnostics' })

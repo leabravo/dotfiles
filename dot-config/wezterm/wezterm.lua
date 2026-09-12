@@ -6,9 +6,9 @@ local scheme = "Catppuccin Mocha"
 local scheme_def = wezterm.color.get_builtin_schemes()[scheme]
 
 local bg_h, bg_s, bg_l, bg_a = wezterm.color.parse(scheme_def.background):hsla()
-local at_h, at_s, at_l, at_a = wezterm.color.parse(scheme_def.tab_bar.inactive_tab.bg_color):hsla()
-local bg = wezterm.color.from_hsla(bg_h, bg_s, bg_l, 0)
-local at = wezterm.color.from_hsla(at_h, bg_s, bg_l, 0)
+local at_h, at_s, at_l, at_a = wezterm.color.parse(scheme_def.tab_bar.active_tab.bg_color):hsla()
+local bg = wezterm.color.from_hsla(bg_h, bg_s, bg_l, bg_a)
+local at = wezterm.color.from_hsla(at_h, at_s, at_l, at_a)
 
 local config = {}
 if wezterm.config_builder then
@@ -46,7 +46,7 @@ config.window_content_alignment = {
 }
 
 if is_windows then
-    config.default_domain = "WSL:Ubuntu"
+    config.default_domain = "WSL:archlinux"
     config.integrated_title_buttons = { "Hide", "Maximize", "Close" }
     config.integrated_title_button_style = "Windows"
     config.use_fancy_tab_bar = true
@@ -91,6 +91,14 @@ else
     config.colors = {
         tab_bar = {
             background = bg,
+            active_tab = {
+                bg_color = bg,
+                fg_color = at,
+            },
+            inactive_tab = {
+                bg_color = bg,
+                fg_color = "#808080",
+            }
         },
     }
 end

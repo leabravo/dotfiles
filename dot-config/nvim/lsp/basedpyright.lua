@@ -10,11 +10,24 @@ return {
     ".git"
   },
   settings = {
-    python = {
+    basedpyright = {
       analysis = {
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
         diagnosticMode = "openFilesOnly",
+        typeCheckingMode = "standard",
+        inlayHints = {
+          callArgumentNames = true,
+          functionReturnTypes = true,
+          variableTypes = false,
+          genericTypes = false,
+        },
+        diagnosticSeverityOverrides = {
+          reportMissingTypeStubs = "none",
+          reportUnknownMemberType = "none",
+          reportUnknownVariableType = "none",
+          reportUnknownArgumentType = "none",
+        },
       },
     },
   },
