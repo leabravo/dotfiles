@@ -75,14 +75,14 @@ if is_windows then
                 fg_color = "#ffffff",
                 italic = true,
             },
-            new_tab = {
+            active_tab = {
+                bg_color = bg,
+                fg_color = at,
+            },
+            inactive_tab = {
                 bg_color = bg,
                 fg_color = "#808080",
-            },
-            active_tab = {
-                bg_color = "rgba(0, 0, 0, 0)",
-                fg_color = "#cdd6f4",
-            },
+            }
         },
     }
 else
