@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 {
   "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
   "runtime": {
@@ -18,11 +17,3 @@
     "enable": false
   }
 }
-||||||| Stash base
-=======
-{
-    "diagnostics.globals": [
-        "vim"
-    ]
-}
->>>>>>> Stashed changes
