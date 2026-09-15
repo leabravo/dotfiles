@@ -8,4 +8,3 @@ vim.g.maplocalleader = " "
 require('plugins')
 require('settings')
 require('lsp')
-
