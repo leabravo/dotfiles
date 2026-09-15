@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 -- Configuración global de diagnósticos (máxima limpieza en pantalla)
 vim.diagnostic.config({
   virtual_text = false, -- No llena el final de la línea con texto de error
@@ -48,3 +49,30 @@ vim.lsp.enable('clangd')
 vim.lsp.enable('basedpyright')
 vim.lsp.enable('gopls')
 
+||||||| Stash base
+=======
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local bufnr = args.buf
+
+    -- Esto se aplica a TODOS los LSPs automáticamente
+    vim.lsp.completion.enable(true, client.id, bufnr, {
+      autotrigger = true,
+      convert = function(item)
+        return { abbr = item.label:gsub('%b()', '') }
+      end,
+    })
+
+    -- Mapeos universales de LSP
+    local opts = { buffer = bufnr }
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+  end,
+})
+
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('zk_lsp')
+vim.lsp.enable('clangd')
+vim.lsp.enable('basedpyright')
+vim.lsp.enable('gopls')
+>>>>>>> Stashed changes
