@@ -65,10 +65,6 @@ if is_windows then
     config.colors = {
         tab_bar = {
             background = bg,
-            inactive_tab = {
-                bg_color = bg,
-                fg_color = "#808080",
-            },
 			 -- Esto quita el gris feo al pasar el ratón
             inactive_tab_hover = {
                 bg_color = "rgba(255, 255, 255, 0)",
