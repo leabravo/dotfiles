@@ -10,19 +10,11 @@ require('config.pins')
 
 vim.o.winborder = 'rounded'
 
--- Enable folding by TreeSitter tree
-vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.wo[0][0].foldmethod = 'expr'
-
--- Force indentation by TreeSitter
-vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
--- optionally enable 24-bit colour
-vim.opt.termguicolors = true
+-- TreeSitter Folding (global default)
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
 
 vim.cmd.colorscheme "catppuccin"
 

@@ -4,6 +4,7 @@ local builtin = require('telescope.builtin')
 local themes = require('telescope.themes')
 
 telescope.setup({})
+pcall(telescope.load_extension, 'fzf')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fr', builtin.live_grep, { desc = 'Telescope live ripgrep' })
 vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = 'Telescope find git' })
