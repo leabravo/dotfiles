@@ -3,7 +3,13 @@
 @define-color crust #11111b;
 @define-color text #cdd6f4;
 @define-color subtext0 #a6adc8;
+@define-color subtext1 #bac2de;
+@define-color overlay0 #6c7086;
+@define-color overlay1 #7f849c;
 @define-color surface0 #313244;
+@define-color surface1 #45475a;
+@define-color surface2 #585b70;
+@define-color pink #f5c2e7;
 @define-color mauve #cba6f7;
 @define-color red #f38ba8;
 @define-color peach #fab387;
@@ -11,61 +17,57 @@
 @define-color green #a6e3a1;
 @define-color teal #94e2d5;
 @define-color sapphire #74c7ec;
-@define-color flamingo #f2cdcd;
 @define-color blue #89b4fa;
+@define-color lavender #b4befe;
 
 * {
-  all: initial;
   border: none;
-  border-radius: 3px;
-  min-height: 0;
-  font-family: "JetBrainsMono Nerd Font", "Font Awesome 5 Free Solid", "Font Awesome 5 Brands Regular", sans-serif;
-  font-weight: 900; /* Solid glyph rendering? */
+  border-radius: 4px;
+  font-family: "JetBrainsMono Nerd Font Propo", "Symbols Nerd Font", "JetBrainsMono Nerd Font", "Font Awesome 5 Free Solid", sans-serif;
   font-size: 12px;
-  padding: 0 2px;
+  font-weight: 500;
 }
 
 label {
-  padding: 0px;
-  margin: 0px;
-  font-weight: normal;
+  padding: 0 2px;
+  margin: 0;
 }
 
 window#waybar {
   background-color: @mantle;
   color: @text;
   transition-property: background-color;
-  transition-duration: 0.75s;
+  transition-duration: 0.5s;
 }
 
 window#waybar.hidden {
-  opacity: 0.5;
+  opacity: 0.2;
 }
 
 #workspaces {
   background-color: transparent;
+  padding: 0 4px;
+  margin-left: 6px;
 }
 
 #workspaces button {
   border-radius: 4px;
   min-width: 0;
-  box-shadow: inset 0 -3px transparent;
-  padding: 2px 10px;
-  background-color: @base;
-  color: @text;
+  padding: 2px 8px;
+  margin: 3px 2px;
+  background-color: transparent;
+  color: @subtext0;
   transition: all 0.2s ease-in-out;
 }
 
 #workspaces button.active {
-  color: @mantle;
-  background-color: @mauve;
+  background-color: @surface0;
+  color: @pink;
 }
 
 #workspaces button:hover {
-  box-shadow: inherit;
-  text-shadow: inherit;
-  color: @mantle;
-  background-color: @text;
+  background-color: @surface0;
+  color: @text;
 }
 
 #workspaces button.urgent {
@@ -73,12 +75,11 @@ window#waybar.hidden {
   color: @mantle;
 }
 
-#window,
+/* Base module styling: transparent background, crisp text, flex-grow to fit */
 #submap,
 #scratchpad,
 #mpd,
 #wireplumber,
-#wireplumber#mic,
 #network,
 #power-profiles-daemon,
 #cpu,
@@ -88,127 +89,189 @@ window#waybar.hidden {
 #keyboard-state,
 #language,
 #battery,
-#battery.bat2,
 #clock,
 #idle_inhibitor,
 #tray {
-  padding: 4px 16px;
-  background-color: @base;
-  color: @mantle;
-  min-height: 0;
+  padding: 1px 4px;
+  margin: 0;
+  background-color: transparent;
+  color: @text;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Active window title: allowed to shrink so long titles don't push modules offscreen */
+#window {
+  color: @subtext1;
+  font-weight: 500;
   min-width: 0;
+  padding: 2px 6px;
 }
 
+window#waybar.empty #window {
+  padding: 0;
+  margin: 0;
+}
+
+/* Hyprland submap / modal indicator */
+#submap {
+  background-color: @peach;
+  color: @mantle;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+#scratchpad {
+  color: @pink;
+}
+
+#scratchpad.empty {
+  color: transparent;
+}
+
+/* Music player daemon */
 #mpd {
-  background-color: @sapphire;
-}
-
-#mpd.disconnected {
-  background-color: @surface0;
-  color: @subtext0;
-}
-
-#idle_inhibitor {
-  background-color: @surface0;
   color: @text;
 }
 
-#idle_inhibitor.activated {
-  background-color: @mauve;
-  color: @mantle;
+#mpd.disconnected {
+  color: @overlay0;
 }
 
+#mpd.stopped {
+  color: @subtext0;
+}
+
+#mpd.paused {
+  color: @subtext0;
+}
+
+/* Idle inhibitor (the eye) */
+#idle_inhibitor {
+  color: @overlay0;
+}
+
+#idle_inhibitor.activated {
+  color: @pink;
+}
+
+/* WirePlumber audio and microphone */
 #wireplumber {
-  background-color: @yellow;
+  color: @text;
 }
 
 #wireplumber.muted {
-  background-color: @surface0;
-  color: @subtext0;
+  color: @red;
 }
 
-#wireplumber#mic {
-  background-color: @yellow;
-  color: @mantle;
+#wireplumber.mic {
+  font-size: 15px;
+  color: @text;
 }
 
-#wireplumber#mic.muted {
-  background-color: @surface0;
-  color: @subtext0;
+#wireplumber.mic.muted {
+  font-size: 15px;
+  color: @red;
 }
 
+/* Network connectivity */
 #network {
-  background-color: @teal;
+  color: @text;
 }
 
 #network.disconnected {
-  background-color: @red;
+  color: @red;
 }
 
+#network.disabled {
+  color: @overlay0;
+}
+
+/* Power profiles */
 #power-profiles-daemon {
-  background-color: @surface0;
   color: @text;
 }
 
 #power-profiles-daemon.performance {
-  background-color: @red;
-  color: @mantle;
+  color: @red;
 }
 
 #power-profiles-daemon.balanced {
-  background-color: @blue;
-  color: @mantle;
+  color: @blue;
 }
 
 #power-profiles-daemon.power-saver {
-  background-color: @green;
-  color: @mantle;
+  color: @green;
 }
 
+/* Hardware metrics (CPU, Memory, Temperature) */
 #cpu {
-  background-color: @green;
-}
-
-#memory {
-  background-color: @peach;
-}
-
-#temperature {
-  background-color: @teal;
-}
-
-#temperature.critical {
-  background-color: @red;
-}
-
-#backlight {
-  background-color: @peach;
-}
-
-#keyboard-state,
-#language {
-  background-color: @surface0;
   color: @text;
 }
 
+#cpu.warning {
+  color: @peach;
+}
+
+#cpu.critical {
+  color: @red;
+  font-weight: 700;
+}
+
+#memory {
+  color: @text;
+}
+
+#memory.warning {
+  color: @peach;
+}
+
+#memory.critical {
+  color: @red;
+  font-weight: 700;
+}
+
+#temperature {
+  color: @text;
+}
+
+#temperature.critical {
+  color: @red;
+  font-weight: 700;
+}
+
+/* Backlight, Keyboard, Language */
+#backlight {
+  color: @text;
+}
+
+#keyboard-state {
+  color: @text;
+}
+
+#keyboard-state label.locked {
+  color: @peach;
+}
+
+#language {
+  color: @text;
+}
+
+/* Battery states */
 #battery {
-  background-color: @red;
+  color: @text;
 }
 
 #battery.charging,
 #battery.plugged {
-  background-color: @green;
-  color: @mantle;
+  color: @green;
 }
 
 #battery.warning:not(.charging) {
-  background-color: @peach;
-  color: @mantle;
+  color: @peach;
 }
 
 #battery.critical:not(.charging) {
-  background-color: @red;
-  color: @mantle;
+  color: @red;
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -218,28 +281,40 @@ window#waybar.hidden {
 
 @keyframes blink {
   to {
-    background-color: @mantle;
-    color: @red;
+    color: @overlay0;
   }
 }
 
+/* Clock (system accent) */
 #clock {
-  background-color: @mauve;
+  color: @pink;
+  font-weight: 600;
 }
 
+/* System tray */
 #tray {
-  background-color: @surface0;
-  color: @text;
+  padding: 0 4px;
+  margin-right: 6px;
 }
 
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @red;
+}
+
+/* Tooltips */
 tooltip {
-  padding: 20px;
   background-color: @crust;
   border: 1px solid @surface0;
+  border-radius: 6px;
+  padding: 8px 12px;
 }
 
 tooltip label {
-  padding: 5px;
-  background-color: transparent;
   color: @text;
+  font-size: 12px;
 }

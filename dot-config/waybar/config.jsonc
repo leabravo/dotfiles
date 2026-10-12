@@ -4,7 +4,7 @@
     // "position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 30, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
+    "spacing": 4, // Spacing between top-level clusters (4px)
     // Choose the order of the modules
     "modules-left": [
         "hyprland/workspaces",
@@ -19,7 +19,6 @@
         "idle_inhibitor",
         "wireplumber",
         "wireplumber#mic",
-        //"custom/mic",
         "network",
         "power-profiles-daemon",
         "cpu",
@@ -118,10 +117,18 @@
     },
     "cpu": {
         "format": "{usage}% ",
-        "tooltip": false
+        "tooltip": false,
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}% ",
+        "states": {
+            "warning": 75,
+            "critical": 90
+        }
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -185,9 +192,9 @@
     "wireplumber#mic": {
         "node-type": "Audio/Source",
         "format": "{icon}",
-        "format-muted": "",
+        "format-muted": "󰍭",
         "return-type": "json",
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-        "format-icons": [""]
-    },
+        "format-icons": ["󰍬"]
+    }
 }

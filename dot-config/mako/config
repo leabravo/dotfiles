@@ -1,0 +1,27 @@
+# Catppuccin Mocha Pink - Mako Notification Daemon Configuration
+
+font=JetBrains Mono 10
+background-color=#1e1e2e
+text-color=#cdd6f4
+border-color=#f5c2e7
+border-size=2
+border-radius=8
+padding=12
+margin=10
+default-timeout=5000
+max-visible=5
+layer=overlay
+anchor=top-right
+
+[urgency=low]
+border-color=#89b4fa
+default-timeout=3000
+
+[urgency=normal]
+border-color=#f5c2e7
+default-timeout=5000
+
+[urgency=critical]
+border-color=#f38ba8
+text-color=#f38ba8
+default-timeout=0
