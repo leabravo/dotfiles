@@ -44,10 +44,18 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
 #workspaces {
   background-color: transparent;
-  padding: 0 4px;
-  margin-left: 6px;
+  padding: 0;
+  margin: 0;
 }
 
 #workspaces button {
@@ -294,7 +302,7 @@ window#waybar.empty #window {
 /* System tray */
 #tray {
   padding: 0 4px;
-  margin-right: 6px;
+  margin: 0;
 }
 
 #tray > .passive {
