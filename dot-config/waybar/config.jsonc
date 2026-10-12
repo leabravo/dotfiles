@@ -10,9 +10,9 @@
         "hyprland/workspaces",
         "hyprland/submap",
         "hyprland/scratchpad",
+        "group/window",
     ],
     "modules-center": [
-        "hyprland/window"
     ],
     "modules-right": [
         "mpd",
@@ -48,7 +48,17 @@
     //         "focused": "",
     //         "default": ""
     //     }
-    // },
+    "group/window": {
+        "orientation": "inherit",
+        "modules": [
+            "hyprland/window"
+        ]
+    },
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 45,
+        "separate-outputs": true
+    },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
