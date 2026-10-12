@@ -91,18 +91,18 @@ hl.env("QT_STYLE_OVERRIDE", "kvantum")
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
     general = {
-        gaps_in  = 2,
-        gaps_out = 9,
+        gaps_in  = 3,
+        gaps_out = 6,
 
-        border_size = 2,
+        border_size = 1,
 
         col = {
-            active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
-            inactive_border = "rgba(595959aa)",
+            active_border   = { colors = {"rgba(f5c2e7ee)", "rgba(cba6f7ee)"}, angle = 45 },
+            inactive_border = "rgba(313244aa)",
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = false,
+        resize_on_border = true,
 
         -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
         allow_tearing = false,
@@ -116,19 +116,19 @@ hl.config({
 
         -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,
-        inactive_opacity = 1.0,
+        inactive_opacity = 0.96,
 
         shadow = {
             enabled      = true,
-            range        = 4,
+            range        = 8,
             render_power = 3,
-            color        = 0xee1a1a1a,
+            color        = 0x8811111b,
         },
 
         blur = {
             enabled   = true,
-            size      = 3,
-            passes    = 1,
+            size      = 5,
+            passes    = 2,
             vibrancy  = 0.1696,
         },
     },
