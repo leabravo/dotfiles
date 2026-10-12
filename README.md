@@ -81,7 +81,8 @@ sudo zypper in --no-recommends \
 sudo zypper in --no-recommends \
   hyprland hyprpaper hyprlock hypridle \
   xdg-desktop-portal-hyprland xdg-desktop-portal-gtk \
-  waybar kitty fuzzel mako pcmanfm-qt
+  waybar kitty fuzzel mako pcmanfm-qt \
+  grim slurp
 
 # 3. Audio, Hardware Control & Power Management
 sudo zypper in --no-recommends \
@@ -94,9 +95,9 @@ sudo zypper in --no-recommends \
   kvantum-manager kvantum-qt6 kvantum-qt5 \
   xsettingsd kora-icon-theme
 
-# 5. Fonts (Glyphs & Emojis)
+# 5. Fonts (UI, Monospace, Glyphs & Emojis)
 sudo zypper in --no-recommends \
-  jetbrains-mono-fonts symbols-only-nerd-fonts \
+  inter-fonts jetbrains-mono-fonts symbols-only-nerd-fonts \
   fontawesome-fonts google-noto-coloremoji-fonts
 
 # 6. Minimal Greeter

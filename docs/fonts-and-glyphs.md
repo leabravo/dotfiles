@@ -58,20 +58,21 @@ flowchart LR
 
 ---
 
-## 4. The Waybar Font Stack
-
-In [`dot-config/waybar/style.css`](../dot-config/waybar/style.css), the font family is configured as:
-
+## 4. The GUI & Waybar Font Stack
+ 
+In [`dot-config/waybar/style.css`](../dot-config/waybar/style.css) and systemwide GTK/Qt configs, the primary GUI font is **Inter**:
+ 
 ```css
 * {
-    font-family: "JetBrainsMono Nerd Font", "Font Awesome 5 Free Solid", "Font Awesome 5 Brands Regular", sans-serif;
+    font-family: "Inter", "JetBrainsMono Nerd Font Propo", "Symbols Nerd Font", "Noto Color Emoji", sans-serif;
 }
 ```
-
-### Why Font Awesome is Required:
-Waybar modules use icons from two distinct families:
-* **Font Awesome (`fontawesome-fonts`):** Provides `` (audio/music), `` (volume mute), `` (mic mute), `` (power/bolt), `` (plugged), and `` (shuffle).
-* **Nerd Fonts (`symbols-only-nerd-fonts`):** Provides backlight brightness icons (`` to ``), Git branches, and CPU/RAM hardware glyphs.
+ 
+### Why Inter + Nerd Fonts:
+* **Inter (`inter-fonts`):** The modern standard for digital screens. Its tall x-height and optical hinting eliminate blur on fractional scaling (e.g., 1.25×).
+* **Font Awesome (`fontawesome-fonts`):** Provides legacy media symbols.
+* **Nerd Fonts (`symbols-only-nerd-fonts`):** Provides backlight icons (`` to ``), Git branches, and CPU/RAM hardware glyphs.
+* **JetBrains Mono (`jetbrains-mono-fonts`):** Dedicated to code, terminals (Kitty), and monospace buffers.
 
 ---
 

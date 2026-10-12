@@ -23,7 +23,7 @@
 * {
   border: none;
   border-radius: 4px;
-  font-family: "JetBrainsMono Nerd Font Propo", "Symbols Nerd Font", "JetBrainsMono Nerd Font", "Font Awesome 5 Free Solid", sans-serif;
+  font-family: "Inter", "JetBrainsMono Nerd Font Propo", "Symbols Nerd Font", "Noto Color Emoji", sans-serif;
   font-size: 12px;
   font-weight: 500;
 }
@@ -45,11 +45,11 @@ window#waybar.hidden {
 }
 
 .modules-left {
-  margin-left: 8px;
+  margin-left: 2px;
 }
 
 .modules-right {
-  margin-right: 8px;
+  margin-right: 2px;
 }
 
 #workspaces {
