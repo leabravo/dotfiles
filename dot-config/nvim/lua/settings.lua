@@ -9,6 +9,7 @@ require('config.telescope')
 require('config.pins')
 
 vim.o.winborder = 'rounded'
+vim.opt.cmdheight = 0
 
 -- TreeSitter Folding (global default)
 vim.opt.foldmethod = 'expr'
