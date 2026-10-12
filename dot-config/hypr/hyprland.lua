@@ -60,6 +60,8 @@ end)
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
+hl.env("XCURSOR_THEME", "Adwaita")
+hl.env("HYPRCURSOR_THEME", "Adwaita")
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
@@ -272,6 +274,14 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
+-- Screenshots (grim + slurp + wl-copy + auto-save to ~/Pictures/Screenshots)
+hl.bind("Print", hl.dsp.exec_cmd('sh -c \'mkdir -p ~/Pictures/Screenshots && grim - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy\''))
+hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd('sh -c \'mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy\''))
+hl.bind(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd('sh -c \'mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png\''))
+-- Ergonomic screenshot binds (Super + Shift + S for area, Super + Alt + S for full screen)
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd('sh -c \'mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy\''))
+hl.bind(mainMod .. " + ALT + S",   hl.dsp.exec_cmd('sh -c \'mkdir -p ~/Pictures/Screenshots && grim - | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | wl-copy\''))
+
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
@@ -286,9 +296,9 @@ for i = 1, 10 do
     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
 
--- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+-- Special workspace (scratchpad)
+hl.bind(mainMod .. " + U",         hl.dsp.workspace.toggle_special("magic"))
+hl.bind(mainMod .. " + SHIFT + U", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
