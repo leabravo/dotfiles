@@ -21,7 +21,7 @@ hl.monitor({
     output   = "",
     mode     = "preferred",
     position = "auto",
-    scale    = "1.25",
+    scale    = "1.2",
 })
 
 
@@ -94,7 +94,7 @@ hl.env("QT_STYLE_OVERRIDE", "kvantum")
 hl.config({
     general = {
         gaps_in  = 3,
-        gaps_out = 6,
+        gaps_out = 9,
 
         border_size = 2,
 
@@ -113,8 +113,8 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 2,
-        rounding_power = 2,
+        rounding       = 3,
+        rounding_power = 4,
 
         -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,

@@ -7,6 +7,7 @@ require('config.nvim_treesitter')
 require('config.lualine')
 require('config.telescope')
 require('config.pins')
+require('config.conjure')
 
 vim.o.winborder = 'rounded'
 vim.opt.cmdheight = 0

@@ -61,6 +61,8 @@ If Hyprland thinks the cursor is 24px, but your browser thinks it's 16px and Ste
 
 * **Why apps freeze for 30 seconds:** When an app opens a file picker under Wayland, it asks the system portal service via D-Bus. If no file picker backend is available, the request hangs until D-Bus times out (which takes 25 to 30 seconds).
   * **Fix:** Install both `xdg-desktop-portal-hyprland` (handles screen capture) and `xdg-desktop-portal-gtk` (handles file pickers).
+* **Why screen sharing fails without `uwsm`:** `xdg-desktop-portal-hyprland` runs as a `systemd --user` service and needs `WAYLAND_DISPLAY`, `XDG_CURRENT_DESKTOP`, and `HYPRLAND_INSTANCE_SIGNATURE` in the `systemd`/D-Bus environment.
+  * **Fix:** Install `uwsm` and launch Hyprland from `tuigreet` with `--cmd 'uwsm start -- hyprland.desktop'`.
 * **Why root prompts silently fail:** Hyprland has no built-in password prompt window. If you try to mount an external hard drive in a file manager without a Polkit agent, the request silently dies.
   * **Fix:** Autostart `/usr/libexec/polkit-gnome-authentication-agent-1` in `hyprland.lua`.
 

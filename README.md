@@ -79,7 +79,7 @@ sudo zypper in --no-recommends \
 
 # 2. Hyprland Desktop Environment & Apps
 sudo zypper in --no-recommends \
-  hyprland hyprpaper hyprlock hypridle \
+  hyprland uwsm hyprpaper hyprlock hypridle \
   xdg-desktop-portal-hyprland xdg-desktop-portal-gtk \
   waybar kitty fuzzel mako pcmanfm-qt \
   grim slurp
@@ -211,14 +211,14 @@ sudo usermod -aG video greeter
 ```
 
 ### Step 6.2: Configure `/etc/greetd/config.toml`
-Configure `tuigreet` with Catppuccin Mocha colors and clean padding:
+Configure `tuigreet` with Catppuccin Mocha colors, clean padding, and `uwsm` session management (required so `systemd --user` and D-Bus receive `WAYLAND_DISPLAY` and `XDG_CURRENT_DESKTOP` for `xdg-desktop-portal-hyprland` screen sharing):
 
 ```toml
 [terminal]
 vt = 1
 
 [default_session]
-command = "tuigreet --time --remember --remember-session --asterisks --greeting 'Welcome to openSUSE' --theme 'border=magenta;text=white;prompt=pink;time=blue;action=blue;button=magenta;container=black;input=white' --window-padding 2 --container-padding 2 --prompt-padding 1 --sessions /usr/share/wayland-sessions --cmd Hyprland"
+command = "tuigreet --time --remember --remember-session --asterisks --greeting 'Welcome to openSUSE' --theme 'border=magenta;text=white;prompt=pink;time=blue;action=blue;button=magenta;container=black;input=white' --window-padding 2 --container-padding 2 --prompt-padding 1 --sessions /usr/share/wayland-sessions --cmd 'uwsm start -- hyprland.desktop'"
 user = "greeter"
 ```
 

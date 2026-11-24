@@ -53,6 +53,12 @@ Hyprland requires **two backends running together**:
 > [!IMPORTANT]
 > If you only install `xdg-desktop-portal-hyprland`, file pickers have no provider, leading directly to the 30-second D-Bus freeze. Both backends are strictly required.
 
+### Why `uwsm` Is Required for Screen Sharing:
+Both `xdg-desktop-portal` and `xdg-desktop-portal-hyprland` run as **`systemd --user` services** activated over D-Bus.
+* If Hyprland is launched directly (e.g. `--cmd Hyprland`), the `systemd --user` and D-Bus activation environments do not inherit `WAYLAND_DISPLAY`, `XDG_CURRENT_DESKTOP=Hyprland`, or `HYPRLAND_INSTANCE_SIGNATURE`.
+* Without those variables, `xdg-desktop-portal-hyprland` cannot attach to your active Wayland display or Hyprland IPC socket, causing **screen sharing** in browsers and apps (OBS, Discord, Firefox, Chromium) to fail.
+* Launching Hyprland via **`uwsm`** (`uwsm start -- hyprland.desktop` in `/etc/greetd/config.toml`) wraps the compositor in a proper `systemd` user session (`graphical-session.target`), automatically propagates the session environment to `systemd --user` and D-Bus, and tears down user services cleanly on logout.
+
 ---
 
 ## 3. Polkit Authentication Agents
